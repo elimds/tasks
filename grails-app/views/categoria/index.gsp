@@ -44,7 +44,7 @@
 			</table>
 			<nav class="bottom">
 				<a href="#" id="btnAddCategoria">Adicionar Categoria</a>
-				<a href="/tasks" >Principal</a>
+				<a href="task/index">Principal</a>
 			</nav>
 		</section>
 	</main>
