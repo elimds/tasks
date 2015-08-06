@@ -12,14 +12,15 @@ class CategoriaController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Categoria.list(params), model:[categoriaInstanceCount: Categoria.count()]
+        //respond Categoria.list(params), model:[categoriaInstanceCount: Categoria.count()]
+        respond Categoria.list(params)
     }
 
     def countCategorias(){
         //def categorias = Categoria.where{( id > 0)}
         //def count = categorias.count()
         render(contentType: "text/json"){
-            [count: Categoria.count()]
+            [count: 0]
         }
     }
 
