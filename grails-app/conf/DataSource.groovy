@@ -38,8 +38,10 @@ environments {
 
             //url = "jdbc:postgresql://" + uri.host + ":" + uri.port + uri.path
             url = "postgres://qsfuegtikovwcq:CpFEdJLZ0BY1UZQR3bpSQTp6e7@ec2-204-236-226-63.compute-1.amazonaws.com:5432/dbs31cvl5ibhob"
-            username = uri.userInfo.split(":")[0]
-            password = uri.userInfo.split(":")[1]
+            //username = uri.userInfo.split(":")[0]
+            //password = uri.userInfo.split(":")[1]
+            username = "qsfuegtikovwcq"
+            password = "CpFEdJLZ0BY1UZQR3bpSQTp6e7"
         }
     }
 }
