@@ -16,10 +16,10 @@ class CategoriaController {
     }
 
     def countCategorias(){
-        def categorias = Categoria.where{( id > 0)}
-        def count = categorias.count()
+        //def categorias = Categoria.where{( id > 0)}
+        //def count = categorias.count()
         render(contentType: "text/json"){
-            [count: count]
+            [count: Categoria.count()]
         }
     }
 
