@@ -8,7 +8,7 @@ storageEngine = function() {
 		save : function(type, obj, successCallback, errorCallback) {
 			$.ajax({
 				method: "post", 
-				url: "categoria/save", 
+				url: window.urlPath + "categoria/save", 
 				data: obj
 			})
 			.done(function( msg ){
@@ -17,7 +17,7 @@ storageEngine = function() {
 		},
 		findAll : function(type, successCallback, errorCallback) {
 			var aCategorias = [];
-			$.ajax({method: 'GET', dataType: "JSON", url: "categoria/list", 
+			$.ajax({method: 'GET', dataType: "JSON", url: window.urlPath + "categoria/list", 
 					success: function (data) {
 						var categorias = [];
 						$.each(data, function(k, v){
@@ -28,16 +28,16 @@ storageEngine = function() {
 				});
 		},
 		delete : function(type, id, successCallback, errorCallback) {
-			$.ajax({method: 'DELETE', dataType: 'JSON', url: 'categoria/delete/'+id});
+			$.ajax({method: 'DELETE', dataType: 'JSON', url: window.urlPath + 'categoria/delete/'+id});
 			successCallback(id);
 		},
 		countCategorias : function (successCallback, errorCallback){
-			$.ajax({method: 'GET', dataType: 'JSON', url: 'categoria/countCategorias', success: function(data){
+			$.ajax({method: 'GET', dataType: 'JSON', url: window.urlPath + 'categoria/countCategorias', success: function(data){
 				successCallback(data);
 			}});
 		},
 		findById : function (type, id, successCallback, errorCallback) {
-			$.ajax({method: 'GET', dataType: 'JSON', url: 'categoria/getById/'+id, success: function(categoria){
+			$.ajax({method: 'GET', dataType: 'JSON', url: window.urlPath + 'categoria/getById/'+id, success: function(categoria){
 				successCallback(categoria);
 			}});
 		}

@@ -1,3 +1,9 @@
+if ($(location).attr('hostname') == "localhost"){
+	window.urlPath = "http://" + $(location).attr('host') + "/tasks/";
+} else {
+	window.urlPath = "http://" + $(location).attr('host') + "/";
+}
+
 (function($) {
   $.fn.extend({
     toObject: function() {
