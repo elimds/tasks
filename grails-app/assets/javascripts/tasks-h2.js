@@ -43,7 +43,11 @@ storageEngine = function() {
 			successCallback(id);
 		},
 		findByProperty : function(type, propertyName, propertyValue, successCallback, errorCallback) {
-			$.ajax({method: 'GET', dataType: 'JSON', url: 'task/countTasks/'+propertyName+'/'+propertyValue, success(data){
+			$.ajax({
+				method: 'GET', 
+				dataType: 'JSON', 
+				url: 'task/countTasks/'+propertyName+'/'+propertyValue, 
+				success: function(data){
 				var tasks = [];
 				$.each(data, function(k, v){
 					tasks.push(v);

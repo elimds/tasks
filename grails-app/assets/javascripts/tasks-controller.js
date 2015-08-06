@@ -26,7 +26,7 @@ tasksController = function() {
 	}
 	var taskPage;
 	var initialised = false;
-	var TYPE = "task";
+	var type = "task";
 	return {
 		init : function(page) {
 			if (!initialised) {
@@ -55,7 +55,7 @@ tasksController = function() {
 				// Função/Listener para apagar uma tarefa
 				$(taskPage).find('#tblTasks tbody').on('click', '.deleteRow', 
 					function(evt) { 					
-						storageEngine.delete(TYPE, $(evt.target).data().taskId, 
+						storageEngine.delete(type, $(evt.target).data().taskId, 
 							function() {
 								$(evt.target).parents('tr').remove(); 
 							}, errorLogger);
@@ -68,9 +68,9 @@ tasksController = function() {
 				$(taskPage).find('#tblTasks tbody').on('click', '.completeRow', 
 					function(evt) { 
 						// Utiliza o método findById para recuperar a tarefa a partir do seu id.
-						storageEngine.findById(TYPE, $(evt.target).data().taskId, function(task) {
+						storageEngine.findById(type, $(evt.target).data().taskId, function(task) {
 							// Chama o método complete do storageEngine para persistir no banco de dados a informação de que esta tarefa foi concluida
-							storageEngine.complete(TYPE, task, function(){
+							storageEngine.complete(type, task, function(){
 								// A partir do elemento clicado (Completar) localizo os elementos acima dele para aplicar a classe "taskCompleted" 
 								$(evt.target).parents().eq(1).siblings().addClass('taskCompleted');
 								// Aplico fadeOut() para ocultar, com efeito, o link/botão "Completar"
@@ -88,7 +88,7 @@ tasksController = function() {
 					evt.preventDefault();
 					if ($(taskPage).find('form').valid()) {
 						var task = $(taskPage).find('form').toObject();
-						storageEngine.save(TYPE, task, function() {
+						storageEngine.save(type, task, function() {
 							$(taskPage).find('#tblTasks tbody').empty();
 							tasksController.loadTasks();
 							$(':input:not(select)').val('');
@@ -102,7 +102,7 @@ tasksController = function() {
 				$(taskPage).find('#tblTasks tbody').on('click', '.editRow', 
 					function(evt) { 
 						$(taskPage).find('#taskCreation').removeClass('not');
-						storageEngine.findById(TYPE, $(evt.target).data().taskId, function(task) {
+						storageEngine.findById(type, $(evt.target).data().taskId, function(task) {
 							$(taskPage).find('form').fromObject(task);
 						}, errorLogger);
 					}
@@ -114,7 +114,7 @@ tasksController = function() {
 		loadTasks : function() {
 			// 5. Exibir as tarefas ordenadas na aplicação
 			// Alterei para chamar o método findOrdered afim de recuperar as tarefas ordenadas pelo atributo findOrdered
-			storageEngine.findAll(TYPE, 
+			storageEngine.findAll(type, 
 				function(tasks) {
 					$.each(tasks, function(index, task) {
 						$('#taskRow').tmpl(task).appendTo($(taskPage).find('#tblTasks tbody'));

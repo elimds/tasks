@@ -26,7 +26,7 @@ categoriasController = function() {
 	}
 	var categoriaPage;
 	var initialised = false;
-	const TYPE = "categoria";
+	var type = "categoria";
 	return {
 		init : function(page) {
 			if (!initialised) {
@@ -47,7 +47,7 @@ categoriasController = function() {
 				});
 				$(categoriaPage).find('#tblCategorias tbody').on('click', '.deleteRow', 
 					function(evt) { 					
-						storageEngine.delete(TYPE, $(evt.target).data().categoriaId, 
+						storageEngine.delete(type, $(evt.target).data().categoriaId, 
 							function() {
 								$(evt.target).parents('tr').remove(); 
 							}, errorLogger);
@@ -58,7 +58,7 @@ categoriasController = function() {
 					evt.preventDefault();
 					if ($(categoriaPage).find('form').valid()) {
 						var categoria = $(categoriaPage).find('form').toObject();
-						storageEngine.save(TYPE, categoria, function() {
+						storageEngine.save(type, categoria, function() {
 							$(categoriaPage).find('#tblCategorias tbody').empty();
 							categoriasController.loadCategorias();
 							$(':input:not(select)').val('');
@@ -69,7 +69,7 @@ categoriasController = function() {
 				$(categoriaPage).find('#tblCategorias tbody').on('click', '.editRow', 
 					function(evt) { 
 						$(categoriaPage).find('#categoriaCreation').removeClass('not');
-						storageEngine.findById(TYPE, $(evt.target).data().categoriaId, function(categoria) {
+						storageEngine.findById(type, $(evt.target).data().categoriaId, function(categoria) {
 							$(categoriaPage).find('form').fromObject(categoria);
 						}, errorLogger);
 					}
@@ -78,7 +78,7 @@ categoriasController = function() {
 			}
     	},
 		loadCategorias : function() {
-			storageEngine.findAll(TYPE, 
+			storageEngine.findAll(type, 
 				function(categorias) {
 					$.each(categorias, function(index, categoria) {
 						$('#categoriaRow').tmpl(categoria).appendTo($(categoriaPage).find('#tblCategorias tbody'));
