@@ -57,7 +57,7 @@
 				<a href="#" id="btnAddTask">Adicionar tarefa</a>
 			</nav>
 			<nav class="bottom">
-				<a href="categoria/index" id="btnAddTask">Manter Categorias de Tarefas</a>
+				<g:link controller="categoria" action="index">Manter Categorias de Tarefas</g:link>
 			</nav>
 		</section>
 	</main>
