@@ -11,7 +11,7 @@ storageEngine = function() {
 			console.log(obj);
 			$.ajax({
 				method: "post", 
-				url: "/tasks/task/save", 
+				url: "task/save", 
 				data: obj
 			})
 			.done(function( msg ){
@@ -22,13 +22,13 @@ storageEngine = function() {
 		// Esta Função é para persistir a informação de que uma tarefa foi marcada como concluida
 		complete : function(type, obj, successCallback, errorCallback){
 			// Registra uma string "Ok" no campo completed para indicar que a tarefa foi concluida
-			$.ajax({method: "POST", url: "/tasks/task/complete/"+obj.id}).done(function(msg){successCallback(obj)});	
+			$.ajax({method: "POST", url: "task/complete/"+obj.id}).done(function(msg){successCallback(obj)});	
 		},
 		findAll : function(type, successCallback, errorCallback) {
 			// Declara e inicializa um novo Array
 			var aTasks = [];
 			// Recuperar todos os objetos do tipo "task"
-			$.ajax({method: 'GET', dataType: "JSON", url: "/tasks/task/list", 
+			$.ajax({method: 'GET', dataType: "JSON", url: "task/list", 
 					success: function (data) {
 						var tasks = [];
 						$.each(data, function(k, v){
@@ -39,11 +39,11 @@ storageEngine = function() {
 				});
 		},
 		delete : function(type, id, successCallback, errorCallback) {
-			$.ajax({method: 'DELETE', dataType: 'JSON', url: '/tasks/task/delete/'+id});
+			$.ajax({method: 'DELETE', dataType: 'JSON', url: 'task/delete/'+id});
 			successCallback(id);
 		},
 		findByProperty : function(type, propertyName, propertyValue, successCallback, errorCallback) {
-			$.ajax({method: 'GET', dataType: 'JSON', url: '/tasks/task/countTasks/'+propertyName+'/'+propertyValue, success(data){
+			$.ajax({method: 'GET', dataType: 'JSON', url: 'task/countTasks/'+propertyName+'/'+propertyValue, success(data){
 				var tasks = [];
 				$.each(data, function(k, v){
 					tasks.push(v);
@@ -52,12 +52,12 @@ storageEngine = function() {
 			}})
 		},
 		countTasks : function (successCallback, errorCallback){
-			$.ajax({method: 'GET', dataType: 'JSON', url: '/tasks/task/countTasks', success: function(data){
+			$.ajax({method: 'GET', dataType: 'JSON', url: 'task/countTasks', success: function(data){
 				successCallback(data);
 			}});
 		},
 		findById : function (type, id, successCallback, errorCallback) {
-			$.ajax({method: 'GET', dataType: 'JSON', url: '/tasks/task/getById/'+id, success: function(task){
+			$.ajax({method: 'GET', dataType: 'JSON', url: 'task/getById/'+id, success: function(task){
 				console.log(task);
 				successCallback(task);
 			}});
