@@ -21,3 +21,6 @@ web-app/WEB-INF/tld/fmt.tld
 /web-app/WEB-INF/classes
 /.link_to_grails_plugins/
 /target-eclipse/
+devDb.h2.db                                                                                            
+devDb.lock.db
+devDb.trace.db  

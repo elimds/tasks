@@ -1,4 +1,9 @@
 #FileLock
+<<<<<<< HEAD
 #Thu Aug 06 20:07:40 BRT 2015
 id=14f05451789db6e3652e40ed7999164b9e1af86f0e5
+=======
+#Thu Aug 06 08:38:25 BRT 2015
+id=14f02ce0fb6a2d62ca3200d92d443ba87e51e570ebf
+>>>>>>> 49da6843c7b11643939a11c371085cef256f4e3c
 method=file
