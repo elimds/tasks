@@ -26,7 +26,7 @@ tasksController = function() {
 	}
 	var taskPage;
 	var initialised = false;
-	const TYPE = "task";
+	var TYPE = "task";
 	return {
 		init : function(page) {
 			if (!initialised) {

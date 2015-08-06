@@ -6,7 +6,6 @@ storageEngine = function() {
 			successCallback(null);
 		},
 		save : function(type, obj, successCallback, errorCallback) {
-			console.log(obj);
 			$.ajax({
 				method: "post", 
 				url: "categoria/save", 
