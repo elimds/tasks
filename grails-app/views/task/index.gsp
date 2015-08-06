@@ -7,6 +7,9 @@
 	<meta name="layout" content="main">
 	<g:set var="entityName" value="${message(code: 'task.label', default: 'Task')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
+	<asset:javascript src="tasks-controller.js"/>
+	<!-- tasks-h2.js possui as funções para tratar a peristência das tarefas usando H2 como base de dados -->
+	<asset:javascript src="tasks-h2.js"/>
 </head>
 <body>
 	<main id="taskPage">

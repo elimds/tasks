@@ -16,11 +16,7 @@
 		<!-- Bibliotecas JQuery, TMPL -->
 		<asset:javascript src="jquery-2.1.4.js"/>
 		<asset:javascript src="jquery.tmpl.min.js"/>
-		<asset:javascript src="tasks-controller.js"/>
 		<asset:javascript src="jquery.validate.js"/>
-
-		<!-- tasks-IndexedDB.js possui as funções para tratar a peristência das tarefas usando H2 como base de dados -->
-		<asset:javascript src="tasks-h2.js"/>
 
 		<!-- Biblioteca datejs para auxiliar nas operações com datas -->
 		<asset:javascript src="date.js"/>
@@ -29,8 +25,9 @@
 	</head>
 	<body>
 		<header>
-			<span style="float: left; vertical-align: text-bottom;"><asset:image src="logo-tasks.png" alt="Control Tasks"/></span>
-			<span style="float: right">Lista de Tarefas</span>
+			<span style="float: left; padding: 15px;"><asset:image src="logo-tasks.png" alt="Control Tasks"/></span>
+			<span style="float: right; padding-right: 10%;">Lista de Tarefas </span>
+			<span style="float: right"> &nbsp; </span>
 		</header>
 
 		<g:layoutBody/>

@@ -8,87 +8,71 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class CategoriaController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", get: "countCategorias"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Categoria.list(params), model:[categoriaInstanceCount: Categoria.count()]
     }
 
-    def show(Categoria categoriaInstance) {
-        respond categoriaInstance
+    def countCategorias(){
+        def categorias = Categoria.where{( id > 0)}
+        def count = categorias.count()
+        render(contentType: "text/json"){
+            [count: count]
+        }
     }
 
-    def create() {
+    def list(){
+        def map = [:]
+        Categoria.list(sort: "nome", order: "asc").each(){
+            map.put(it.id, it.toArray())
+        }
+        render(contentType: "text/json") { map }
+    }
+
+    def getById(){
+        def categoria = Categoria.get(params.id)
+        render(contentType: "text/json"){
+            categoria.toArray()
+        }
+    }
+
+    def create(){
         respond new Categoria(params)
     }
 
     @Transactional
-    def save(Categoria categoriaInstance) {
-        if (categoriaInstance == null) {
-            notFound()
-            return
+    def save() {
+        def categoria
+        if (params?.id){
+            categoria = Categoria.get(params.id)
+        } else {
+            categoria = new Categoria()
         }
+        categoria.nome = params.nome
 
-        if (categoriaInstance.hasErrors()) {
-            respond categoriaInstance.errors, view:'create'
-            return
-        }
+        categoria.save flush:true
 
-        categoriaInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'categoria.label', default: 'Categoria'), categoriaInstance.id])
-                redirect categoriaInstance
-            }
-            '*' { respond categoriaInstance, [status: CREATED] }
-        }
-    }
-
-    def edit(Categoria categoriaInstance) {
-        respond categoriaInstance
-    }
-
-    @Transactional
-    def update(Categoria categoriaInstance) {
-        if (categoriaInstance == null) {
-            notFound()
-            return
-        }
-
-        if (categoriaInstance.hasErrors()) {
-            respond categoriaInstance.errors, view:'edit'
-            return
-        }
-
-        categoriaInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Categoria.label', default: 'Categoria'), categoriaInstance.id])
-                redirect categoriaInstance
-            }
-            '*'{ respond categoriaInstance, [status: OK] }
+        render(contentType: "text/json"){
+            json
         }
     }
 
     @Transactional
-    def delete(Categoria categoriaInstance) {
-
-        if (categoriaInstance == null) {
-            notFound()
-            return
-        }
-
-        categoriaInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Categoria.label', default: 'Categoria'), categoriaInstance.id])
-                redirect action:"index", method:"GET"
+    def delete() {
+        def categoria
+        if (params?.id){
+            categoria = Categoria.get(params.id)
+            println categoria
+            categoria.delete (flush: true, failOnError: true)
+            if (categoria.hasErrors()){
+                println categoria.errors
             }
-            '*'{ render status: NO_CONTENT }
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'Categoria.label', default: 'Categoria'), categoria.id])
+        }
+        render(contentType: "text/json"){
+            json
         }
     }
 
